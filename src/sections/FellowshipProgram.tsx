@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
+import Yellowlabel from "../components/yellowlabel";
 
 const FellowshipProgram = () => {
   return (
-    <section className="py-16 px-6 bg-white min-h-full flex justify-center items-center">
+    <section id="fellowship" className="py-16 px-6 bg-white min-h-full flex justify-center items-center">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         {/* Text Content */}
         <div>
@@ -12,6 +13,7 @@ const FellowshipProgram = () => {
           >
             Fellowship Program
           </h2>
+          <Yellowlabel text="coming soon"/>
 
           <h3 className="text-xl font-semibold text-gray-800 mb-2">
             Build. Learn. Lead.

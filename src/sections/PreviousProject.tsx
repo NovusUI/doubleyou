@@ -8,6 +8,7 @@ const projects = [
     support: "Supported by Regis and Regis Consult",
     color: "bg-blue-600",
     gradient: "from-blue-500 to-blue-700",
+    link:"https://www.instagram.com/p/CUNERAlMyeN/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     year: "2021",
@@ -15,6 +16,8 @@ const projects = [
     support: "Supported by MTN Nigeria and Taraba State Government",
     color: "bg-green-600",
     gradient: "from-green-500 to-green-700",
+    link:"https://www.instagram.com/tv/CNSy3avAWJm/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
+
   },
   {
     year: "2020",
@@ -22,6 +25,7 @@ const projects = [
     support: "Supported by National Youth Service Corps (NYSC) and Ebonyi State Government",
     color: "bg-yellow-500",
     gradient: "from-yellow-400 to-yellow-600 text-black", // light bg needs dark text
+    link:"https://www.instagram.com/p/B774Evug3X4/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     year: "2019",
@@ -29,6 +33,7 @@ const projects = [
     support: "Supported by Horlatech Training Institute.",
     color: "bg-blue-600",
     gradient: "from-blue-500 to-blue-700",
+    link:"https://www.instagram.com/p/B2mZEHvA64A/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
   {
     year: "2019",
@@ -36,13 +41,14 @@ const projects = [
     support: "Supported by Horlatech Training Institute.",
     color: "bg-green-600",
     gradient: "from-green-500 to-green-700",
+    link:"https://www.instagram.com/p/ByQDxpopkCd/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA=="
   },
 ];
 
 
 export default function PreviousProjects() {
   return (
-    <section className="flex flex-col lg:flex-row gap-12 px-6 lg:px-20 py-16 bg-white">
+    <section id="previous-project" className="flex flex-col lg:flex-row gap-12 px-6 lg:px-20 py-16 bg-white">
       <div className="flex-1">
         <h2 className="text-4xl font-bold text-gray-900 mb-8">Previous Projects</h2>
         <div className="relative border-l-2 border-gray-200 pl-6">
@@ -65,7 +71,7 @@ export default function PreviousProjects() {
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 200, damping: 10 }}
                 className={`flex items-center text-sm px-4 py-1.5 rounded-lg transition bg-gradient-to-r ${project.gradient} hover:brightness-110 transition`}
-
+                onClick={() => window.open(project.link)}
               >
                 Learn more <ArrowRight className="w-4 h-4 ml-1" />
               </motion.button>

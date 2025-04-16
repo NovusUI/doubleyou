@@ -109,7 +109,7 @@ const PartnershipsWithImpact = () => {
           Program & Community Engagement
         </h2>
         <p className="text-gray-700 text-lg md:w-[50%]">
-          We empower youth across schools, correctional centers, and informal
+          We empower youth across schools, and informal
           communities through fellowships, boot camps, and leadership tours...
         </p>
       </motion.div>

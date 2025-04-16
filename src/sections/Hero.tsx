@@ -1,9 +1,35 @@
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import Yellowlabel from "../components/yellowlabel";
+import { useEffect, useState } from "react";
+
+
+
+const text = [{text1: "Welcome to",text2:"DOUBLEYOU Groups"},{text1: "Empowering Lifelong Learning",text2:"Through Games & Stories"}]
 
 const Hero = () => {
+
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) =>
+        prev === 1 ? 0 : prev + 1
+      );
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const scrollToSection = (id:string) => {
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div
+    id="hero"
       className="h-screen snap-start flex flex-col items-center justify-center bg-fixed bg-center bg-no-repeat bg-cover pb-20"
       style={{ backgroundImage: `url('/Background.png')` }}
     >
@@ -17,18 +43,31 @@ const Hero = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
+
         >
           <Yellowlabel text="welcome to doubleyou" />
         </motion.div>
 
+        <AnimatePresence mode="wait">
         <motion.h1
           className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.6 }}
+          key={activeIndex}
+          exit={{ opacity: 0, y: -20 }}
         >
-          Empowering Learning <br /> Through Games & Stories
+          {text[activeIndex].text1} <br /> {text[activeIndex].text2}
         </motion.h1>
+        </AnimatePresence>
+        {/* <motion.h1
+          className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          Empowering Lifelong Learning <br /> Through Games & Stories
+        </motion.h1> */}
 
         <motion.p
           className="text-gray-600 mb-8 max-w-xl mx-auto"
@@ -46,12 +85,14 @@ const Hero = () => {
           transition={{ delay: 0.8, duration: 0.6 }}
         >
           <motion.button
+          onClick={()=>scrollToSection("core-solutions")}
             whileHover={{ scale: 1.05 }}
             className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition"
           >
             Explore Our Platforms
           </motion.button>
           <motion.button
+          onClick={()=>scrollToSection("fellowship")}
             whileHover={{ scale: 1.05 }}
             className="px-6 py-3 border border-green-600 text-green-600 rounded-lg font-medium hover:bg-green-50 transition"
           >

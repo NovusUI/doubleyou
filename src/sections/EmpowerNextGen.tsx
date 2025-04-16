@@ -11,28 +11,19 @@ const impactHighlights = [
     {
       title: "Partnerships",
       description:
-        "with prestigious institutions like Covenant University, Ashesi University Ghana, and IAESTE",
+        "with prestigious institutions like Covenant University, American University of Nigeria, and MTN Nigeria",
     },
     {
       title: "National Tournaments",
       description: "and youth competitions held across multiple states",
     },
-    {
-      title: "Internship Programs",
-      description:
-        "offering global opportunities for participants from Brazil, Mexico, and across Africa",
-    },
-    {
-      title: "Reaching Underserved Communities",
-      description:
-        "including orphans, widows, and underprivileged youth with free educational resources",
-    },
+ 
   ];
   
   const EmpowerNextGen = () => {
     
     return (
-      <section className="bg-[#F0F8F6] py-20 px-6 min-h-full">
+      <section id="next-gen" className="bg-[#F0F8F6] py-20 px-6 min-h-full flex justify-center items-center">
         <div className="max-w-5xl mx-auto">
           <Yellowlabel text="our impact"/>
           <motion.h2 

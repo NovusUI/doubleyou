@@ -4,7 +4,7 @@ import Yellowlabel from '../components/yellowlabel';
 
 function AboutUs() {
   return (
-    <section className="min-h-screen snap-start flex items-center bg-white px-5 py-20 md:p-0">
+    <section id="about-us" className="min-h-screen snap-start flex items-center bg-white px-5 py-20 md:p-0">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         
         {/* IMAGE ANIMATION */}
@@ -87,7 +87,7 @@ function AboutUs() {
                 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                Founded in 2019, we are dedicated to creating interactive, engaging, and identity-affirming learning experiences...
+                Founded in 2019, we are dedicated to creating interactive, engaging learning experiences...
               </motion.p>
             </div>
             <div>

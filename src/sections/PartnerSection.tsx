@@ -74,6 +74,7 @@ const PartnerSection = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition"
+            onClick={() => window.open('https://thelabari.co','_blank')}
           >
             Explore Labari
           </motion.button>

@@ -19,6 +19,7 @@ const CoreSolutions = () => {
 
   return (
     <section
+    id="core-solutions"
       ref={ref}
       className="relative py-20 px-6 snap-y snap-mandatory min-h-screen bg-fixed bg-center bg-no-repeat bg-cover flex flex-col justify-center items-center"
       style={{ backgroundImage: "url('/Background1.png')" }}
