@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 
 
-const text = [{text1: "Welcome to",text2:"DOUBLEYOU Groups"},{text1: "Empowering Lifelong Learning",text2:"Through Games & Stories"}]
+const text = [{text1: "Welcome to",text2:"DOUBLEYOU", text3:"Group",gredient:true},{text1: "Empowering Lifelong Learning",text2:"Through Games & Stories"}]
 
 const Hero = () => {
 
@@ -57,7 +57,7 @@ const Hero = () => {
           key={activeIndex}
           exit={{ opacity: 0, y: -20 }}
         >
-          {text[activeIndex].text1} <br /> {text[activeIndex].text2}
+          {text[activeIndex].text1} <br /> <span className={`${text[activeIndex].gredient  ?"bg-gradient-to-r bg-clip-text text-transparent from-[#2C6B2F] via-[#0047FF] to-[#F7C928] " : ""}`}>{text[activeIndex].text2}</span> {text[activeIndex].text3}
         </motion.h1>
         </AnimatePresence>
         {/* <motion.h1
