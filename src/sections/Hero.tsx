@@ -1,0 +1,66 @@
+import { motion } from "framer-motion";
+import Yellowlabel from "../components/yellowlabel";
+
+const Hero = () => {
+  return (
+    <div
+      className="h-screen snap-start flex flex-col items-center justify-center bg-fixed bg-center bg-no-repeat bg-cover pb-20"
+      style={{ backgroundImage: `url('/Background.png')` }}
+    >
+      <motion.div
+        className="text-center px-4"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+        >
+          <Yellowlabel text="welcome to doubleyou" />
+        </motion.div>
+
+        <motion.h1
+          className="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
+        >
+          Empowering Learning <br /> Through Games & Stories
+        </motion.h1>
+
+        <motion.p
+          className="text-gray-600 mb-8 max-w-xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
+          we are shaping the future of education—one learner, one story, one streak at a time.
+        </motion.p>
+
+        <motion.div
+          className="flex flex-wrap justify-center gap-4"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8, duration: 0.6 }}
+        >
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="px-6 py-3 bg-green-600 text-white rounded-lg font-medium hover:bg-green-700 transition"
+          >
+            Explore Our Platforms
+          </motion.button>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            className="px-6 py-3 border border-green-600 text-green-600 rounded-lg font-medium hover:bg-green-50 transition"
+          >
+            Join Our Fellowship
+          </motion.button>
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
+export default Hero;
