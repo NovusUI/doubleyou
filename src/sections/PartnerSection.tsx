@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, Landmark, BarChart2, School } from "lucide-react";
+import { Globe, BarChart2, School } from "lucide-react";
 
 const partners = [
   {

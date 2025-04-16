@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import Footer from './sections/Footer';
 import PreviousProjects from './sections/PreviousProject';
 import Navbar from './sections/NavBar';

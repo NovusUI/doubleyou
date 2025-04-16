@@ -11,8 +11,7 @@ const CoreSolutions = () => {
     offset: ["start end", "end start"],
   });
 
-  // Background: furthest depth
-  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+
   // Mid layer: title, label
   const midY = useTransform(scrollYProgress, [0, 1], [0, -60]);
   // Foreground: cards
