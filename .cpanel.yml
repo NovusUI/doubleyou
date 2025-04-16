@@ -1,0 +1,6 @@
+deployment:
+  tasks:
+    - /bin/echo "Deploying Vite + React + TypeScript App (Yarn)..."
+    - yarn install
+    - yarn build
+    - cp -r dist/* ~/public_html/
