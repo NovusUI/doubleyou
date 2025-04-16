@@ -65,7 +65,7 @@ const CoreSolutions = () => {
             <p className="text-gray-700 mb-3">
               We transform learning into play. Through gamified platforms with quiz tournaments and streak-based reward systems, we make education engaging and boost knowledge retention.
             </p>
-            <a href="#" className="font-semibold underline">Explore Doubleyou</a>
+            <a href="https://doubleyou-app.vercel.app/" target="_blank" className="font-semibold underline">Explore Doubleyou</a>
           </div>
         </motion.div>
 
@@ -90,7 +90,7 @@ const CoreSolutions = () => {
             <p className="text-gray-700 mb-3">
               Labari is our platform dedicated to preserving and amplifying African narratives. By combining tradition with innovation, we use storytelling to create educational experiences that promote cultural understanding, identity, and healing.
             </p>
-            <a href="#" className="text-green-800 font-semibold underline">Explore Labari</a>
+            <a href="https://thelabari.co" target="_blank" className="text-green-800 font-semibold underline">Explore Labari</a>
           </div>
         </motion.div>
       </motion.div>
