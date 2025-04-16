@@ -5,42 +5,42 @@ const coreValues = [
   {
     title: "Godliness",
     description:
-      "At Doubleyou, we hold godliness as a core value that permeates every aspect of our endeavors. We believe in conducting our business with a strong sense of ethics, moral responsibility, and a commitment to values that transcend the bottom line.",
+      "At Doubleyou, we hold godliness as a core value that permeates every aspect of our endeavors. We believe in conducting our business with a strong sense of ethics, moral responsibility, and a commitment to values that transcend thebottomline. In our pursuit of revolutionizing education and employment, we strive to embody principles of fairness, compassion, and empathy. Our dedication to godliness extends beyond business transactions, shaping a corporate culture that values the inherent dignity of every individual and seeks to contribute positively to the communities we serve.",
     borderColor: "border-blue-400",
     bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
   },
   {
     title: "Leadership",
     description:
-      "Leadership is a guiding principle at Doubleyou, influencing how we navigate the dynamic landscape of education and employment transformation. We aspire not only to lead in the markets we serve but also to inspire leadership at every level of our organization.",
+      "Leadership is a guiding principle at Doubleyou, influencing how we navigate the dynamic landscape of education and employment transformation. We aspire not only to lead in the markets we serve but also to inspire leadership at every level of our organization. Through visionary thinking and a commitment to continuous improvement, we empower our team to take initiative, make informed decisions, and drive positive change. As we connect quiz creators and learners, our leadership ethos extends to fostering a collaborative environment where diverse perspectives are valued, and innovative ideas flourish, propelling both our startup and the communities we engage with forward.",
     borderColor: "border-green-400",
     bgColor: "bg-[#edfdf4]/70",
   },
   {
-    title: "Godliness",
+    title: "Integrity",
     description:
-      "At Doubleyou, we hold godliness as a core value that permeates every aspect of our endeavors. We believe in conducting our business with a strong sense of ethics, moral responsibility, and a commitment to values that transcend the bottom line.",
+      "integrity is the bedrock of our operations at Doubleyou. We are unwavering in our commitment to honesty, transparency, and ethical conduct in all our interactions. As we revolutionize education and employment, we prioritize trust and accountability, recognizing that they are fundamental to building enduring relationships with quiz creators, learners, and stakeholders. Upholding integrity is not just a moral obligation but a strategic imperative, ensuring that our platform is a reliable and trustworthy space for all users. In an industry that demands credibility, our commitment to integrity distinguishes Doubleyou as a startup that can be relied upon to act with honesty and sincerity.",
     borderColor: "border-blue-400",
     bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
   },
   {
-    title: "Leadership",
+    title: "Dilligence",
     description:
-      "Leadership is a guiding principle at Doubleyou, influencing how we navigate the dynamic landscape of education and employment transformation. We aspire not only to lead in the markets we serve but also to inspire leadership at every level of our organization.",
+      "Diligence is a cornerstone of our approach at Doubleyou. In our mission to make learning fun, engaging, and rewarding, we recognize the importance of dedication, hard work, and attention to detail. We approach challenges with a determined spirit, constantly striving for excellence in the quality of content, user experience, and technological innovation on our platform. Through diligence, we aim to surpass expectations, ensuring that our users have access to a seamless and enriching educational experience. This commitment to diligence not only sets the standard for our startup but also contributes to the broader goal of transforming education and employment landscapes.",
     borderColor: "border-green-400",
     bgColor: "bg-[#edfdf4]/70",
   },
   {
-    title: "Godliness",
+    title: "Excellence",
     description:
-      "At Doubleyou, we hold godliness as a core value that permeates every aspect of our endeavors. We believe in conducting our business with a strong sense of ethics, moral responsibility, and a commitment to values that transcend the bottom line.",
+      "Excellence is not just a goal but a standard that defines Doubleyou. In revolutionizing education and employment, we pursue excellence across every facet of our platform. From the curated quizzes that inspire learning to the user interface that enhances accessibility, we are dedicated to delivering a derior experience. We foster a culture of continuous improvement, encouraging our team to innovate and refine our offerings to exceed the expectations of our users. Through this commitment to excellence, we aim to be a catalyst for positive change, setting new benchmarks in the industry and contributing to the advancement of educational and employment opportunities.",
     borderColor: "border-blue-400",
     bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
   },
   {
-    title: "Leadership",
+    title: "Service",
     description:
-      "Leadership is a guiding principle at Doubleyou, influencing how we navigate the dynamic landscape of education and employment transformation. We aspire not only to lead in the markets we serve but also to inspire leadership at every level of our organization.",
+      "Service is at the heart of our mission at Doubleyou. We recognize that our purpose extends beyond the platform, encompassing a responsibility to serve the broader community. By leveraging game mechanics and online accessibility, we seek to bridge gaps in education and employment opportunities, particularly focusing on increasing digital and financial inclusion across Nigeria. Our commitment to service extends to the partnerships we form with states, actively promoting investment opportunities and contributing to the socio-economic development of the regions we operate in. Through our dedication to service, we aim to make a lasting impact on individuals, communities, and the educational landscape as a whole.",
     borderColor: "border-green-400",
     bgColor: "bg-[#edfdf4]/70",
   },
