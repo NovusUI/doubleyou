@@ -33,9 +33,9 @@ const Footer = () => {
             <h4 className="text-gray-900 font-semibold mb-3">Follow Us</h4>
             <ul className="space-y-2">
               <li><a href="https://www.facebook.com/Doubleyouinitiative" target="_blank">Facebook</a></li>
-              <li><a href="https://www.instagram.com/doubleyou_social?igsh=NWwzcGxtenNpNHpx" target="_blank">Instagram</a></li>
+              <li><a href="https://www.instagram.com/doubleyougroup/" target="_blank">Instagram</a></li>
               <li><a href="https://twitter.com/DoubleyouNGA" target="_blank">X</a></li>
-              <li><a href="https://www.linkedin.com/company/doubleyou-concept/" target="_blank">LinkedIn</a></li>
+              <li><a href="https://www.linkedin.com/company/doubleyougroup/" target="_blank">LinkedIn</a></li>
             </ul>
           </div>
         </div>

@@ -8,6 +8,7 @@ const LatestProduct = () => {
 
   return (
     <section
+   
       className="py-12 px-6 h-full bg-fixed bg-center bg-no-repeat bg-cover flex flex-col justify-center items-center text-[#0E2A46]"
       style={{ backgroundImage: "url('/Background2.png')" }}
     >
@@ -18,7 +19,6 @@ const LatestProduct = () => {
 
         {/* Card with Glassmorphism and 3D tilt */}
         <motion.div
-     
           ref={tiltRef}
           style={{
             ...tiltStyle,
