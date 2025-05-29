@@ -7,7 +7,7 @@ import { motion, AnimatePresence} from "framer-motion";
 const partnerships = [
   {
     logo: "/cu-logo.png",
-    title: "Covenant University’s CCODEL",
+    title: "Covenant University’s CUCRID",
     description:
       "Through our groundbreaking partnership with Covenant University's Elearning platform, CCODEL, we enhance educational accessibility and integrate real-world applications for students.",
   },
