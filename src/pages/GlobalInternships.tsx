@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "../sections/NavBar";
 import Footer from "../sections/Footer";
 import { motion } from "framer-motion";
+import SEO from "../components/SEO";
 
 const GlobalInternships = () => {
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -79,6 +80,19 @@ const GlobalInternships = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
+      <SEO
+        title="Doubleyou Global Internships – Students & Organizations"
+        description="Find and host meaningful internships across borders. Students get matched to opportunities; organizations access vetted talent via Doubleyou."
+        url="/global-internships"
+        image="/hero.png"
+        keywords={[
+          "Doubleyou Global Internships",
+          "Student internships",
+          "Organizations",
+          "Talent",
+          "Placements",
+        ]}
+      />
       <Navbar />
 
       <main className="flex-1">

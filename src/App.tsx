@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import Footer from "./sections/Footer";
+import SEO from "./components/SEO";
 import PreviousProjects from "./sections/PreviousProject";
 import Navbar from "./sections/NavBar";
 const PartnerSection = lazy(() => import("./sections/PartnerSection"));
@@ -19,6 +20,21 @@ function App() {
   //snap-y snap-mandatory
   return (
     <>
+      <SEO
+        title="Doubleyou – Learning through Games & Stories | Global Internships"
+        description="Doubleyou connects students and organizations through playful learning and real-world internships. Explore platforms, values, and impact."
+        url="/"
+        image="/hero.png"
+        keywords={[
+          "Doubleyou",
+          "Global Internships",
+          "Students",
+          "Organizations",
+          "Learning",
+          "Games",
+          "Stories",
+        ]}
+      />
       <Navbar />
 
       <div id="home" className="h-screen overflow-y-scroll">
