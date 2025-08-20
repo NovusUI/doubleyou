@@ -87,7 +87,7 @@ const GlobalInternships = () => {
           ref={heroRef}
           id="gi-hero"
           className="relative min-h-[75vh] flex items-center bg-center bg-cover bg-no-repeat"
-          style={{ backgroundImage: "url('/Background.png')" }}
+          style={{ backgroundImage: "url('/hero.png')" }}
           aria-label="Doubleyou Global Internships hero section"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[#062d22]/85 via-[#043a76]/55 to-black/40" />
