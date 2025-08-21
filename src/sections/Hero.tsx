@@ -5,7 +5,10 @@ import { useNavigate } from "react-router-dom";
 
 const text = [
   { text1: "Welcome to", text2: "DOUBLEYOU", text3: "Group", gredient: true },
-  { text1: "Empowering Lifelong Learning", text2: "Through Games & Stories" },
+  {
+    text1: "Empowering Lifelong Learning",
+    text2: "Through Global Internships, Games & Stories",
+  },
 ];
 
 const Hero = () => {
