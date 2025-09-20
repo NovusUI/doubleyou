@@ -486,7 +486,7 @@ const GlobalInternships = () => {
             <div className="mt-8 rounded-xl overflow-hidden ring-1 ring-gray-200 bg-white p-2">
               <iframe
                 title="Doubleyou Students"
-                src="https://form.typeform.com/to/PvHzVl9G"
+                src="https://form.typeform.com/to/vrcJPPLh"
                 className="w-full h-[720px]"
                 style={{ border: 0 }}
                 allow="camera; microphone; autoplay; encrypted-media;"
@@ -496,7 +496,7 @@ const GlobalInternships = () => {
               Powered by Typeform —{" "}
               <a
                 className="underline"
-                href="https://form.typeform.com/to/PvHzVl9G"
+                href="https://form.typeform.com/to/vrcJPPLh"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -527,7 +527,7 @@ const GlobalInternships = () => {
             <div className="mt-8 rounded-xl overflow-hidden ring-1 ring-gray-200 bg-white p-2">
               <iframe
                 title="Doubleyou Organizations"
-                src="https://form.typeform.com/to/vrcJPPLh"
+                src="https://form.typeform.com/to/PvHzVl9G"
                 className="w-full h-[720px]"
                 style={{ border: 0 }}
                 allow="camera; microphone; autoplay; encrypted-media;"
