@@ -1,8 +1,9 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import Yellowlabel from "../components/yellowlabel";
-import gamepad from "../assets/Gamepad.svg"
-import book from "../assets/Book.svg"
+import gamepad from "../assets/Gamepad.svg";
+import book from "../assets/Book.svg";
 
 const CoreSolutions = () => {
   const ref = useRef(null);
@@ -93,6 +94,27 @@ const CoreSolutions = () => {
             <a href="https://thelabari.co" target="_blank" className="text-green-800 font-semibold underline">Explore Labari</a>
           </div>
         </motion.div>
+      </motion.div>
+
+      {/* Fancy Button for The Quest Quiz */}
+      <motion.div 
+        className="mt-16 flex justify-center w-full"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+      >
+        <Link 
+          to="/quest-quiz" 
+          className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-gradient-to-r from-[#1B75E8] to-[#00BC65] rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
+        >
+          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-full group-hover:h-56 opacity-20"></span>
+          <span className="relative flex items-center gap-3 text-lg md:text-xl tracking-wide">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            The Quest Quiz
+          </span>
+        </Link>
       </motion.div>
     </section>
   );
