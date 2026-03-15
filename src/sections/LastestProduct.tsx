@@ -8,21 +8,20 @@ const LatestProduct = () => {
 
   return (
     <section
-   
       className="py-12 px-6 h-full bg-fixed bg-center bg-no-repeat bg-cover flex flex-col justify-center items-center text-[#0E2A46]"
       style={{ backgroundImage: "url('/Background2.png')" }}
     >
       <div className="max-w-3xl mx-auto">
         <h2 className="text-2xl font-bold text-center mb-6 bg-gradient-to-r from-[#00BC65] via-[#00B0E0] to-[#001C98] bg-clip-text text-transparent animate-pulseGradient">
-  Our Latest Product
-</h2>
+          Our Latest Product
+        </h2>
 
         {/* Card with Glassmorphism and 3D tilt */}
         <motion.div
           ref={tiltRef}
           style={{
             ...tiltStyle,
-            willChange: "transform"
+            willChange: "transform",
           }}
           className="rounded-2xl border border-white/20 p-8 bg-white/10 backdrop-blur-md shadow-xl text-center"
         >
@@ -50,7 +49,7 @@ const LatestProduct = () => {
             whileHover={{ y: -5 }}
             transition={{ type: "spring", stiffness: 300 }}
             className="bg-[#00BC65] hover:bg-green-600 text-white font-medium px-6 py-2 rounded-full transition"
-            onClick={() => window.open('https://thelabari.co','_blank')}
+            onClick={() => window.open("https://labaribooks.com", "_blank")}
           >
             Explore Labari
           </motion.button>

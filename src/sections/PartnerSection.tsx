@@ -67,14 +67,15 @@ const PartnerSection = () => {
           ))}
         </ul>
         <p className="text-center text-gray-600 text-sm mb-8">
-          Supported by: Independent Initiative | Committed to Sustainable Development Goals.
+          Supported by: Independent Initiative | Committed to Sustainable
+          Development Goals.
         </p>
         <div className="text-center">
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition"
-            onClick={() => window.open('https://thelabari.co','_blank')}
+            onClick={() => window.open("https://labaribooks.com", "_blank")}
           >
             Explore Labari
           </motion.button>
