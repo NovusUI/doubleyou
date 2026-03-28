@@ -58,7 +58,7 @@ function AboutUs() {
             }}
           
           >
-            DOUBLEYOU GROUP is a mission-driven edtech company that advances access to quality education across Africa and the global south...
+            DOUBLEYOU CENTRE is a mission-driven edtech company that advances access to quality education across Africa and the global south...
           </motion.p>
 
           <motion.div
