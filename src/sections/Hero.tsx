@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const text = [
-  { text1: "Welcome to", text2: "DOUBLEYOU", text3: "Group", gredient: true },
+  { text1: "Welcome to", text2: "DOUBLEYOU", text3: "Centre", gredient: true },
   {
     text1: "Empowering Lifelong Learning",
     text2: "Through Global Internships, Games & Stories",
