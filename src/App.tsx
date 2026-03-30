@@ -3,6 +3,7 @@ import Footer from "./sections/Footer";
 import SEO from "./components/SEO";
 import PreviousProjects from "./sections/PreviousProject";
 import Navbar from "./sections/NavBar";
+import BloodDrivePopup from "./components/BloodDrivePopup";
 const PartnerSection = lazy(() => import("./sections/PartnerSection"));
 const CoreValues = lazy(() => import("./sections/CoreValue"));
 const FellowshipProgram = lazy(() => import("./sections/FellowshipProgram"));
@@ -20,6 +21,7 @@ function App() {
   //snap-y snap-mandatory
   return (
     <>
+      <BloodDrivePopup />
       <SEO
         title="Doubleyou – Learning through Games & Stories | Global Internships"
         description="Doubleyou connects students and organizations through playful learning and real-world internships. Explore platforms, values, and impact."
