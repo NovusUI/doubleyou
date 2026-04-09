@@ -1,5 +1,5 @@
 import Yellowlabel from "../components/yellowlabel";
-import { useTilt } from "../hooks/usetilt"; // adjust path as needed
+import { useTilt } from "../hooks/usetilt";
 import {motion} from "framer-motion"
 
 
@@ -17,11 +17,9 @@ const impactHighlights = [
       title: "National Tournaments",
       description: "and youth competitions held across multiple states",
     },
- 
   ];
-  
+
   const EmpowerNextGen = () => {
-    
     return (
       <section id="next-gen" className="bg-[#F0F8F6] py-20 px-6 min-h-full flex justify-center items-center">
         <div className="max-w-5xl mx-auto">

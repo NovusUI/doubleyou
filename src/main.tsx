@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.tsx";
 import GlobalInternships from "./pages/GlobalInternships.tsx";
 import QuestQuiz from "./pages/QuestQuiz.tsx";
+import InternPortal from "./pages/InternPortal.tsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "/quest-quiz",
     element: <QuestQuiz />,
+  },
+  {
+    path: "/intern-portal",
+    element: <InternPortal />,
   },
 ]);
 
