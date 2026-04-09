@@ -1,8 +1,52 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Navbar from "../sections/NavBar";
 import Footer from "../sections/Footer";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+
+// Proper top-level component so hooks are called at the top level (rules of hooks)
+function AnimatedCounter({
+  to,
+  suffix = "+",
+  durationMs = 1500,
+}: {
+  to: number;
+  suffix?: string;
+  durationMs?: number;
+}) {
+  const [value, setValue] = useState(0);
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    const io = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setStarted(true);
+        io.disconnect();
+      }
+    });
+    if (ref.current) io.observe(ref.current);
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const start = performance.now();
+    const animate = (ts: number) => {
+      const progress = Math.min((ts - start) / durationMs, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.floor(eased * to));
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    requestAnimationFrame(animate);
+  }, [started, durationMs, to]);
+
+  return (
+    <div ref={ref} className="text-3xl font-bold text-green-700">
+      {value.toLocaleString()} {suffix}
+    </div>
+  );
+}
 
 const GlobalInternships = () => {
   const heroRef = useRef<HTMLDivElement | null>(null);
@@ -31,51 +75,6 @@ const GlobalInternships = () => {
     );
     if (heroRef.current) observer.observe(heroRef.current);
     return () => observer.disconnect();
-  }, []);
-
-  const AnimatedCounter = useMemo(() => {
-    return ({
-      to,
-      suffix = "+",
-      durationMs = 1500,
-    }: {
-      to: number;
-      suffix?: string;
-      durationMs?: number;
-    }) => {
-      const [value, setValue] = useState(0);
-      const ref = useRef<HTMLDivElement | null>(null);
-      const [started, setStarted] = useState(false);
-
-      useEffect(() => {
-        const io = new IntersectionObserver((entries) => {
-          if (entries[0].isIntersecting) {
-            setStarted(true);
-            io.disconnect();
-          }
-        });
-        if (ref.current) io.observe(ref.current);
-        return () => io.disconnect();
-      }, []);
-
-      useEffect(() => {
-        if (!started) return;
-        const start = performance.now();
-        const animate = (ts: number) => {
-          const progress = Math.min((ts - start) / durationMs, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          setValue(Math.floor(eased * to));
-          if (progress < 1) requestAnimationFrame(animate);
-        };
-        requestAnimationFrame(animate);
-      }, [started, durationMs, to]);
-
-      return (
-        <div ref={ref} className="text-3xl font-bold text-green-700">
-          {value.toLocaleString()} {suffix}
-        </div>
-      );
-    };
   }, []);
 
   return (

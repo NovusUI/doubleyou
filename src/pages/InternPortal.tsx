@@ -9,19 +9,27 @@ const SCRIPT_URL =
 
 type ViewState = 'login' | 'dashboard' | 'adminLogin' | 'adminDashboard';
 
+interface InternUser { email: string; name: string; }
+interface LogEntry { timestamp: string; hours: number; description: string; week: number | string; email?: string; name?: string; }
+interface LeaderboardEntry { name: string; totalHours: number; }
+interface InternData { logs: LogEntry[]; totalHours: number; weekNumber: number; targetHours: number; hourlyRate: number; }
+interface AdminStats { totalEntries: number; totalHours: number; totalEarnings: number; targetHours: number; hourlyRate: number; }
+interface InternRecord { email: string; name: string; startDate: string; status: string; }
+interface AdminData { allLogs: LogEntry[]; interns: InternRecord[]; stats: AdminStats; }
+
 export default function InternPortal() {
   const [view, setView] = useState<ViewState>('login');
   const [initializing, setInitializing] = useState(true); // true while restoring session on load
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [currentUser, setCurrentUser] = useState<any>(null);
+  const [currentUser, setCurrentUser] = useState<InternUser | null>(null);
   
   // Dashboard state
-  const [internData, setInternData] = useState<any>(null);
-  const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  const [internData, setInternData] = useState<InternData | null>(null);
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
   
   // Admin state
-  const [adminData, setAdminData] = useState<any>(null);
+  const [adminData, setAdminData] = useState<AdminData | null>(null);
 
   // Forms
   const [email, setEmail] = useState('');
@@ -51,11 +59,6 @@ export default function InternPortal() {
     setError('');
 
     try {
-      if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
-         setError('Please configure the SCRIPT_URL first.');
-         setLoading(false);
-         return;
-      }
       const res = await fetch(`${SCRIPT_URL}?action=validateIntern&email=${encodeURIComponent(email)}`);
       const data = await res.json();
 
@@ -79,12 +82,6 @@ export default function InternPortal() {
     setError('');
 
     try {
-      if (SCRIPT_URL === 'YOUR_APPS_SCRIPT_WEB_APP_URL') {
-         setError('Please configure the SCRIPT_URL first.');
-         setLoading(false);
-         return;
-      }
-      
       const res = await fetch(`${SCRIPT_URL}?action=validateAdmin&password=${encodeURIComponent(adminPass)}`);
       const data = await res.json();
 
@@ -94,7 +91,7 @@ export default function InternPortal() {
       } else {
         setError('Invalid admin password.');
       }
-    } catch (err) {
+    } catch {
       setError('Connection error. Please try again.');
     }
     setLoading(false);
@@ -178,16 +175,16 @@ export default function InternPortal() {
     if (!adminData || !adminData.allLogs) return;
     
     const headers = ['Timestamp', 'Email', 'Name', 'Week', 'Hours', 'Description'];
-    const rows = adminData.allLogs.map((log: any) => [
+    const rows = adminData.allLogs.map((log: LogEntry) => [
       log.timestamp,
-      log.email,
-      log.name,
+      log.email ?? '',
+      log.name ?? '',
       log.week,
       log.hours,
-      `"${log.description.replace(/"/g, '""')}"` // Escape quotes
+      `"${String(log.description).replace(/"/g, '""')}"` // Escape quotes
     ]);
     
-    const csvContent = [headers.join(','), ...rows.map((r: any) => r.join(','))].join('\n');
+    const csvContent = [headers.join(','), ...rows.map((r: (string | number)[]) => r.join(','))].join('\n');
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
@@ -377,7 +374,7 @@ export default function InternPortal() {
                             <p className="text-gray-500 text-sm">No hours logged yet.</p>
                         ) : (
                             <div className="space-y-3">
-                                {internData.logs?.map((log: any, i: number) => (
+                                {internData.logs?.map((log: LogEntry, i: number) => (
                                     <div key={i} className="flex gap-4 p-3 bg-gray-50 rounded-lg text-sm border border-gray-100">
                                         <div className="min-w-[60px] font-semibold text-gray-900">{log.hours}h</div>
                                         <div className="flex-1 text-gray-600">{log.description}</div>
@@ -454,7 +451,7 @@ export default function InternPortal() {
              </div>
              <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-sm">
                  <p className="text-sm text-gray-500 mb-1">Active Interns</p>
-                 <p className="text-3xl font-bold text-gray-900">{adminData.interns.filter((i:any)=>i.status==='active').length}</p>
+                 <p className="text-3xl font-bold text-gray-900">{adminData.interns.filter((i: InternRecord) => i.status === 'active').length}</p>
              </div>
         </div>
 
@@ -475,7 +472,7 @@ export default function InternPortal() {
                          </tr>
                      </thead>
                      <tbody className="divide-y divide-gray-100">
-                         {adminData.allLogs.map((log: any, i: number) => (
+                         {adminData.allLogs.map((log: LogEntry, i: number) => (
                              <tr key={i} className="hover:bg-gray-50/50">
                                  <td className="px-6 py-3 whitespace-nowrap text-gray-500">{new Date(log.timestamp).toLocaleDateString()}</td>
                                  <td className="px-6 py-3 font-medium text-gray-900">{log.name}</td>
