@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Target, Download, LogOut, ArrowRight, Table } from 'lucide-react';
+import {
+  Activity,
+  Target,
+  Download,
+  LogOut,
+  ArrowRight,
+  Table,
+  Pencil,
+} from "lucide-react";
 import Navbar from '../sections/NavBar';
 
 // REPLACE WITH YOUR APPS SCRIPT URL AFTER DEPLOYING
 const SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbzzrpJDWew27GhXOrr7Be99UHp64LGxrPAHUTvNlpjsLDuMFqZ1DeLwYo4IiuvQj9TJUA/exec";
+  "https://script.google.com/macros/s/AKfycby1Pputrjdm3grhGkYHMnYvfewt9o_wXAiIo1RiTiB8muA-8XdRNnARE1CB6gPEVND19A/exec";
 
 type ViewState = 'login' | 'dashboard' | 'adminLogin' | 'adminDashboard';
 
@@ -36,12 +44,16 @@ export default function InternPortal() {
   const [adminPass, setAdminPass] = useState('');
   const [hours, setHours] = useState('');
   const [description, setDescription] = useState('');
+  const [logDate, setLogDate] = useState(() =>
+    new Date().toLocaleDateString("en-CA"),
+  );
+  const [editingLog, setEditingLog] = useState<LogEntry | null>(null); // non-null = edit mode
 
   // Check session on load — show spinner until resolved
   useEffect(() => {
-    const sessionEmail = sessionStorage.getItem('internEmail');
-    const sessionName = sessionStorage.getItem('internName');
-    const sessionAdminToken = sessionStorage.getItem('adminToken');
+    const sessionEmail = sessionStorage.getItem("internEmail");
+    const sessionName = sessionStorage.getItem("internName");
+    const sessionAdminToken = sessionStorage.getItem("adminToken");
 
     if (sessionAdminToken) {
       fetchAdminData(sessionAdminToken).finally(() => setInitializing(false));
@@ -56,22 +68,24 @@ export default function InternPortal() {
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await fetch(`${SCRIPT_URL}?action=validateIntern&email=${encodeURIComponent(email)}`);
+      const res = await fetch(
+        `${SCRIPT_URL}?action=validateIntern&email=${encodeURIComponent(email)}`,
+      );
       const data = await res.json();
 
       if (data.valid) {
         setCurrentUser({ email: data.email, name: data.name });
-        sessionStorage.setItem('internEmail', data.email);
-        sessionStorage.setItem('internName', data.name);
+        sessionStorage.setItem("internEmail", data.email);
+        sessionStorage.setItem("internName", data.name);
         fetchDashboardData(data.email);
       } else {
-        setError(data.error || 'Invalid or inactive intern email.');
+        setError(data.error || "Invalid or inactive intern email.");
       }
     } catch {
-      setError('Connection error. Please try again.');
+      setError("Connection error. Please try again.");
     }
     setLoading(false);
   };
@@ -79,20 +93,22 @@ export default function InternPortal() {
   const handleAdminLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await fetch(`${SCRIPT_URL}?action=validateAdmin&password=${encodeURIComponent(adminPass)}`);
+      const res = await fetch(
+        `${SCRIPT_URL}?action=validateAdmin&password=${encodeURIComponent(adminPass)}`,
+      );
       const data = await res.json();
 
       if (data.valid) {
-        sessionStorage.setItem('adminToken', data.token);
+        sessionStorage.setItem("adminToken", data.token);
         fetchAdminData(data.token);
       } else {
-        setError('Invalid admin password.');
+        setError("Invalid admin password.");
       }
     } catch {
-      setError('Connection error. Please try again.');
+      setError("Connection error. Please try again.");
     }
     setLoading(false);
   };
@@ -101,16 +117,18 @@ export default function InternPortal() {
     setLoading(true);
     try {
       const [userDataRes, leaderboardRes] = await Promise.all([
-        fetch(`${SCRIPT_URL}?action=getInternData&email=${encodeURIComponent(userEmail)}`),
-        fetch(`${SCRIPT_URL}?action=getLeaderboard`)
+        fetch(
+          `${SCRIPT_URL}?action=getInternData&email=${encodeURIComponent(userEmail)}`,
+        ),
+        fetch(`${SCRIPT_URL}?action=getLeaderboard`),
       ]);
       const userData = await userDataRes.json();
       const leaderboardData = await leaderboardRes.json();
       setInternData(userData);
       setLeaderboard(leaderboardData.interns || []);
-      setView('dashboard');
+      setView("dashboard");
     } catch {
-      setError('Failed to load dashboard data.');
+      setError("Failed to load dashboard data.");
     }
     setLoading(false);
   };
@@ -118,19 +136,21 @@ export default function InternPortal() {
   const fetchAdminData = async (token: string) => {
     setLoading(true);
     try {
-      const res = await fetch(`${SCRIPT_URL}?action=getAdminData&token=${encodeURIComponent(token)}`);
+      const res = await fetch(
+        `${SCRIPT_URL}?action=getAdminData&token=${encodeURIComponent(token)}`,
+      );
       const data = await res.json();
-      
+
       if (data.error) {
         setError(data.error);
-        sessionStorage.removeItem('adminToken');
-        setView('adminLogin');
+        sessionStorage.removeItem("adminToken");
+        setView("adminLogin");
       } else {
         setAdminData(data);
-        setView('adminDashboard');
+        setView("adminDashboard");
       }
     } catch {
-      setError('Failed to load admin data.');
+      setError("Failed to load admin data.");
     }
     setLoading(false);
   };
@@ -139,26 +159,51 @@ export default function InternPortal() {
     e.preventDefault();
     if (!currentUser || !hours || !description) return;
     setLoading(true);
-    setError('');
+    setError("");
 
     try {
-      const res = await fetch(
-        `${SCRIPT_URL}?action=logHours&email=${encodeURIComponent(currentUser.email)}&hours=${encodeURIComponent(hours)}&description=${encodeURIComponent(description)}`
-      );
+      const params = editingLog
+        ? `action=editLog&email=${encodeURIComponent(currentUser.email)}&timestamp=${encodeURIComponent(editingLog.timestamp)}&hours=${encodeURIComponent(hours)}&description=${encodeURIComponent(description)}&logDate=${encodeURIComponent(logDate)}`
+        : `action=logHours&email=${encodeURIComponent(currentUser.email)}&hours=${encodeURIComponent(hours)}&description=${encodeURIComponent(description)}&logDate=${encodeURIComponent(logDate)}`;
+
+      const res = await fetch(`${SCRIPT_URL}?${params}`);
       const data = await res.json();
-      
+
       if (data.success) {
-        setHours('');
-        setDescription('');
-        // Refresh dashboard
+        setHours("");
+        setDescription("");
+        setLogDate(new Date().toLocaleDateString("en-CA"));
+        setEditingLog(null);
         fetchDashboardData(currentUser.email);
       } else {
-        setError(data.error || 'Failed to log hours.');
+        setError(
+          data.error || `Failed to ${editingLog ? "update" : "log"} hours.`,
+        );
       }
     } catch {
-      setError('Connection error. Please try again.');
+      setError("Connection error. Please try again.");
     }
     setLoading(false);
+  };
+
+  const handleStartEdit = (log: LogEntry) => {
+    setEditingLog(log);
+    setHours(String(log.hours));
+    setDescription(log.description);
+    setLogDate(log.timestamp.split("T")[0]);
+    setError("");
+    // Scroll the form into view on mobile
+    document
+      .getElementById("log-hours-form")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingLog(null);
+    setHours("");
+    setDescription("");
+    setLogDate(new Date().toLocaleDateString("en-CA"));
+    setError("");
   };
 
   const handleLogout = () => {
@@ -292,124 +337,237 @@ export default function InternPortal() {
     return (
       <div className="max-w-6xl w-full mx-auto animate-in fade-in duration-500">
         <div className="flex justify-between items-end mb-8">
-            <div>
-                <h1 className="text-3xl font-bold text-gray-900">Welcome, {currentUser?.name}</h1>
-                <p className="text-gray-500 mt-1">Doubleyou Internship Tracker</p>
-            </div>
-            <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-red-500 hover:text-red-700 font-medium bg-red-50 px-4 py-2 rounded-lg transition">
-                <LogOut className="w-4 h-4"/> Logout
-            </button>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">
+              Welcome, {currentUser?.name}
+            </h1>
+            <p className="text-gray-500 mt-1">Doubleyou Internship Tracker</p>
+          </div>
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-2 text-sm text-red-500 hover:text-red-700 font-medium bg-red-50 px-4 py-2 rounded-lg transition"
+          >
+            <LogOut className="w-4 h-4" /> Logout
+          </button>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            {/* Log Hours Form */}
-            <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 md:col-span-1">
-                <div className="flex items-center gap-2 mb-6">
-                    <Activity className="w-5 h-5 text-[#1B75E8]"/>
-                    <h2 className="text-xl font-bold text-gray-900">Log Hours</h2>
+          {/* Log Hours Form */}
+          <div
+            id="log-hours-form"
+            className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 md:col-span-1"
+          >
+            <div className="flex items-center justify-between gap-2 mb-6">
+              <div className="flex items-center gap-2">
+                <Activity className="w-5 h-5 text-[#1B75E8]" />
+                <h2 className="text-xl font-bold text-gray-900">
+                  {editingLog ? "Edit Log" : "Log Hours"}
+                </h2>
+              </div>
+              {editingLog && (
+                <button
+                  type="button"
+                  onClick={handleCancelEdit}
+                  className="flex items-center gap-1 text-xs text-gray-400 hover:text-red-500 transition"
+                >
+                  ✕ Cancel
+                </button>
+              )}
+            </div>
+            {editingLog && (
+              <p className="text-xs text-amber-600 bg-amber-50 border border-amber-100 rounded-lg px-3 py-2 mb-4">
+                Editing entry from{" "}
+                {new Date(editingLog.timestamp).toLocaleDateString()}
+              </p>
+            )}
+            <form onSubmit={handleLogHours} className="space-y-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Date
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    max={new Date().toLocaleDateString("en-CA")}
+                    className="w-full px-4 py-3 bg-gray-50 text-black border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0B9F6E] outline-none transition"
+                    value={logDate}
+                    onChange={(e) => setLogDate(e.target.value)}
+                  />
                 </div>
-                <form onSubmit={handleLogHours} className="space-y-4">
-                    <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">Hours Worked</label>
-                        <input
-                            type="number" step="0.5" min="0.5" max="24" required
-                            className="w-full px-4 py-3 bg-gray-50 text-black border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0B9F6E] outline-none transition"
-                            placeholder="e.g. 2.5"
-                            value={hours}
-                            onChange={(e) => setHours(e.target.value)}
-                        />
-                    </div>
-                    <div>
-                         <label className="block text-sm font-medium text-gray-700 mb-1">What did you work on?</label>
-                         <textarea
-                            required rows={3}
-                            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0B9F6E] text-black outline-none transition resize-none"
-                            placeholder="Describe your tasks..."
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                         />
-                    </div>
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <button
-                        type="submit" disabled={loading}
-                        className="w-full py-3 bg-gray-900 text-white rounded-xl font-semibold hover:bg-gray-800 transition-all disabled:opacity-70"
-                    >
-                        {loading ? 'Submitting...' : 'Submit Log'}
-                    </button>
-                </form>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Hours Worked
+                  </label>
+                  <input
+                    type="number"
+                    step="0.5"
+                    min="0.5"
+                    max="24"
+                    required
+                    className="w-full px-4 py-3 bg-gray-50 text-black border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0B9F6E] outline-none transition"
+                    placeholder="e.g. 2.5"
+                    value={hours}
+                    onChange={(e) => setHours(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  What did you work on?
+                </label>
+                <textarea
+                  required
+                  rows={3}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#0B9F6E] text-black outline-none transition resize-none"
+                  placeholder="Describe your tasks..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+              {error && <p className="text-red-500 text-sm">{error}</p>}
+              <button
+                type="submit"
+                disabled={loading}
+                className={`w-full py-3 rounded-xl font-semibold transition-all disabled:opacity-70 text-white ${
+                  editingLog
+                    ? "bg-amber-500 hover:bg-amber-600"
+                    : "bg-gray-900 hover:bg-gray-800"
+                }`}
+              >
+                {loading
+                  ? "Saving..."
+                  : editingLog
+                    ? "Update Log"
+                    : "Submit Log"}
+              </button>
+            </form>
+          </div>
+
+          <div className="md:col-span-2 flex flex-col gap-6">
+            {/* Progress Overview */}
+            <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 flex gap-6 items-center">
+              <div className="flex-1">
+                <div className="flex justify-between text-sm mb-2 font-medium">
+                  <span className="text-gray-500">Programme Progress</span>
+                  <span className="text-[#0B9F6E]">
+                    {internData.totalHours} / {internData.targetHours}h
+                  </span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-3 mb-4 overflow-hidden">
+                  <div
+                    className="bg-[#0B9F6E] h-3 rounded-full transition-all duration-1000"
+                    style={{ width: `${progressPercentage}%` }}
+                  ></div>
+                </div>
+                <div className="flex gap-8">
+                  <div>
+                    <p className="text-xs text-gray-400">Est. Earnings</p>
+                    <p className="text-xl font-bold text-gray-900">
+                      $
+                      {(internData.totalHours * internData.hourlyRate).toFixed(
+                        2,
+                      )}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-xs text-gray-400">Current Week</p>
+                    <p className="text-xl font-bold text-gray-900">
+                      Week {internData.weekNumber}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="hidden sm:flex w-24 h-24 rounded-full bg-green-50 items-center justify-center border-4 border-green-100">
+                <Target className="w-8 h-8 text-[#0B9F6E]" />
+              </div>
             </div>
 
-            <div className="md:col-span-2 flex flex-col gap-6">
-                {/* Progress Overview */}
-                <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 flex gap-6 items-center">
-                     <div className="flex-1">
-                         <div className="flex justify-between text-sm mb-2 font-medium">
-                            <span className="text-gray-500">Programme Progress</span>
-                            <span className="text-[#0B9F6E]">{internData.totalHours} / {internData.targetHours}h</span>
-                         </div>
-                         <div className="w-full bg-gray-100 rounded-full h-3 mb-4 overflow-hidden">
-                             <div className="bg-[#0B9F6E] h-3 rounded-full transition-all duration-1000" style={{ width: `${progressPercentage}%` }}></div>
-                         </div>
-                         <div className="flex gap-8">
-                             <div>
-                                 <p className="text-xs text-gray-400">Est. Earnings</p>
-                                 <p className="text-xl font-bold text-gray-900">${(internData.totalHours * internData.hourlyRate).toFixed(2)}</p>
-                             </div>
-                             <div>
-                                 <p className="text-xs text-gray-400">Current Week</p>
-                                 <p className="text-xl font-bold text-gray-900">Week {internData.weekNumber}</p>
-                             </div>
-                         </div>
-                     </div>
-                     <div className="hidden sm:flex w-24 h-24 rounded-full bg-green-50 items-center justify-center border-4 border-green-100">
-                         <Target className="w-8 h-8 text-[#0B9F6E]"/>
-                     </div>
-                </div>
-
-                {/* My Logs History */}
-                <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 flex-1 overflow-hidden flex flex-col">
-                    <h2 className="text-lg font-bold text-gray-900 mb-4">Recent Logs</h2>
-                    <div className="overflow-y-auto flex-1 pr-2 max-h-[300px]">
-                        {internData.logs?.length === 0 ? (
-                            <p className="text-gray-500 text-sm">No hours logged yet.</p>
-                        ) : (
-                            <div className="space-y-3">
-                                {internData.logs?.map((log: LogEntry, i: number) => (
-                                    <div key={i} className="flex gap-4 p-3 bg-gray-50 rounded-lg text-sm border border-gray-100">
-                                        <div className="min-w-[60px] font-semibold text-gray-900">{log.hours}h</div>
-                                        <div className="flex-1 text-gray-600">{log.description}</div>
-                                        <div className="text-xs text-gray-400 whitespace-nowrap">{new Date(log.timestamp).toLocaleDateString()}</div>
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                </div>
+            {/* My Logs History */}
+            <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100 flex-1 overflow-hidden flex flex-col">
+              <h2 className="text-lg font-bold text-gray-900 mb-4">
+                Recent Logs
+              </h2>
+              <div className="overflow-y-auto flex-1 pr-2 max-h-[300px]">
+                {internData.logs?.length === 0 ? (
+                  <p className="text-gray-500 text-sm">No hours logged yet.</p>
+                ) : (
+                  <div className="space-y-3">
+                    {internData.logs?.map((log: LogEntry, i: number) => (
+                      <div
+                        key={i}
+                        className={`flex gap-3 p-3 rounded-lg text-sm border transition ${
+                          editingLog?.timestamp === log.timestamp
+                            ? "bg-amber-50 border-amber-200"
+                            : "bg-gray-50 border-gray-100"
+                        }`}
+                      >
+                        <div className="min-w-[60px] font-semibold text-gray-900">
+                          {log.hours}h
+                        </div>
+                        <div className="flex-1 text-gray-600">
+                          {log.description}
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <div className="text-xs text-gray-400">
+                            {new Date(log.timestamp).toLocaleDateString()}
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleStartEdit(log)}
+                            className="p-1 rounded hover:bg-amber-100 text-gray-400 hover:text-amber-600 transition"
+                            title="Edit this log"
+                          >
+                            <Pencil className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
+          </div>
         </div>
 
         {/* Leaderboard */}
         <div className="bg-white p-6 rounded-[20px] shadow-sm border border-gray-100  mb-20">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">Live Leaderboard</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {leaderboard.map((intern, i) => (
-                     <div key={i} className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl bg-gray-50/50">
-                         <div className="text-2xl font-black text-gray-300 w-8">{i + 1}</div>
-                         <div className="flex-1">
-                             <p className="font-bold text-gray-900">{intern.name}</p>
-                             <div className="flex gap-2 items-center mt-1">
-                                 <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden max-w-[150px]">
-                                     <div className="bg-[#1B75E8] h-1.5 rounded-full" style={{ width: `${Math.min(100, (intern.totalHours / internData.targetHours)*100)}%`}}></div>
-                                 </div>
-                                 <p className="text-xs text-gray-500">{intern.totalHours}h / {internData.targetHours}h</p>
-                             </div>
-                         </div>
-                         <div className="text-right">
-                             <p className="text-sm font-bold text-[#0B9F6E]">${(intern.totalHours * internData.hourlyRate).toFixed(2)}</p>
-                         </div>
-                     </div>
-                ))}
-            </div>
+          <h2 className="text-xl font-bold text-gray-900 mb-6">
+            Live Leaderboard
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {leaderboard.map((intern, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4 p-4 border border-gray-100 rounded-xl bg-gray-50/50"
+              >
+                <div className="text-2xl font-black text-gray-300 w-8">
+                  {i + 1}
+                </div>
+                <div className="flex-1">
+                  <p className="font-bold text-gray-900">{intern.name}</p>
+                  <div className="flex gap-2 items-center mt-1">
+                    <div className="w-full bg-gray-200 h-1.5 rounded-full overflow-hidden max-w-[150px]">
+                      <div
+                        className="bg-[#1B75E8] h-1.5 rounded-full"
+                        style={{
+                          width: `${Math.min(100, (intern.totalHours / internData.targetHours) * 100)}%`,
+                        }}
+                      ></div>
+                    </div>
+                    <p className="text-xs text-gray-500">
+                      {intern.totalHours}h / {internData.targetHours}h
+                    </p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-[#0B9F6E]">
+                    ${(intern.totalHours * internData.hourlyRate).toFixed(2)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     );
