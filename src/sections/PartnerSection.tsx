@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Globe, BookOpen, Building2, HeartPulse } from "lucide-react";
+import { BookOpen, Globe, HeartPulse } from "lucide-react";
 
 const partnerCategories = [
   {

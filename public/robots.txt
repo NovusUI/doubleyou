@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Disallow any dev/test paths
+Disallow: /src/
+
+Sitemap: https://doubleyou.com.ng/sitemap.xml
