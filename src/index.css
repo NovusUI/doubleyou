@@ -1,13 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  /* Brand colors */
+  --color-navy: #0E1B2E;
+  --color-navy-light: #162438;
+  --color-gold: #F7C928;
+  --color-warm-white: #FAFAF8;
+  --color-off-white: #F4F4F1;
+
+  /* Ecosystem product colors */
+  --color-quest: #DC2626;
+  --color-quest-light: #FEF2F2;
+  --color-labari: #16A34A;
+  --color-labari-light: #F0FDF4;
+  --color-innov: #D97706;
+  --color-innov-light: #FFFBEB;
+
+  /* Typography */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #FBF9FF;
+  color-scheme: light;
+  color: var(--color-navy);
+  background-color: var(--color-warm-white);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -15,3 +32,88 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-warm-white);
+  color: var(--color-navy);
+}
+
+/* Section standard spacing */
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+}
+
+/* Gradient text utility */
+.gradient-text-brand {
+  background: linear-gradient(135deg, #2C6B2F, #0047FF, #F7C928);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Tag / label chip */
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  background-color: #FEF9C3;
+  color: #92400E;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #FDE68A;
+  margin-bottom: 1rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(247, 201, 40, 0.3); }
+  50% { box-shadow: 0 0 20px 8px rgba(247, 201, 40, 0.1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}

@@ -1,94 +1,112 @@
 import { Suspense, lazy } from "react";
 import Footer from "./sections/Footer";
 import SEO from "./components/SEO";
-import PreviousProjects from "./sections/PreviousProject";
 import Navbar from "./sections/NavBar";
 import BloodDrivePopup from "./components/BloodDrivePopup";
-const PartnerSection = lazy(() => import("./sections/PartnerSection"));
-const CoreValues = lazy(() => import("./sections/CoreValue"));
+
+// Eagerly loaded (above fold)
+const Hero = lazy(() => import("./sections/Hero"));
+
+// Lazy loaded (below fold)
+const AboutUs = lazy(() => import("./sections/AboutUs"));
+const FourPillars = lazy(() => import("./sections/FourPillars"));
+const CoreSolutions = lazy(() => import("./sections/CoreSolutions"));
 const FellowshipProgram = lazy(() => import("./sections/FellowshipProgram"));
-const LatestProduct = lazy(() => import("./sections/LastestProduct"));
-const EmpowerNextGen = lazy(() => import("./sections/EmpowerNextGen"));
-const PartnershipsWithImpact = lazy(
-  () => import("./sections/PartnershipWithImpact")
+const BloodDriveSection = lazy(() => import("./sections/BloodDriveSection"));
+const GlobalAlignment = lazy(() => import("./sections/GlobalAlignment"));
+const OurHub = lazy(() => import("./sections/OurHub"));
+const CoreValues = lazy(() => import("./sections/CoreValue"));
+const PreviousProjects = lazy(() => import("./sections/PreviousProject"));
+const PartnerSection = lazy(() => import("./sections/PartnerSection"));
+const GiveSection = lazy(() => import("./sections/GiveSection"));
+const FinalCTA = lazy(() => import("./sections/FinalCTA"));
+
+const Loading = () => (
+  <div className="flex items-center justify-center py-24">
+    <div className="w-8 h-8 border-2 border-[#F7C928] border-t-transparent rounded-full animate-spin" />
+  </div>
 );
 
-const Hero = lazy(() => import("./sections/Hero"));
-const AboutUs = lazy(() => import("./sections/AboutUs"));
-const CoreSolutions = lazy(() => import("./sections/CoreSolutions"));
-
 function App() {
-  //snap-y snap-mandatory
   return (
     <>
       <BloodDrivePopup />
       <SEO
-        title="Doubleyou – Learning through Games & Stories | Global Internships"
-        description="Doubleyou connects students and organizations through playful learning and real-world internships. Explore platforms, values, and impact."
+        title="Doubleyou — Advancing Human Potential Across Africa"
+        description="Doubleyou is a mission-driven institution building systems that expand access to knowledge, empower young people, and create pathways to opportunity through education, innovation, and community impact."
         url="/"
         image="/hero.png"
         keywords={[
           "Doubleyou",
-          "Global Internships",
-          "Students",
-          "Organizations",
-          "Learning",
-          "Games",
-          "Stories",
+          "Human Capital Development",
+          "Africa Education",
+          "Edtech",
+          "Quest",
+          "Labari Books",
+          "Campus Impact Fellows",
+          "Blood Drive",
+          "Innovation Ecosystem",
+          "Covenant University",
+          "SDGs",
         ]}
       />
       <Navbar />
 
-      <div id="home" className="h-screen overflow-y-scroll">
-        <Suspense
-          fallback={<div className="text-center py-10">Loading...</div>}
-        >
+      <main id="home">
+        <Suspense fallback={<Loading />}>
           <Hero />
         </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
+
+        <Suspense fallback={<Loading />}>
           <AboutUs />
         </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
+
+        <Suspense fallback={<Loading />}>
+          <FourPillars />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
           <CoreSolutions />
         </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
-          <PartnershipsWithImpact />
-        </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
-          <EmpowerNextGen />
-        </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
-          <LatestProduct />
-        </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
+
+        <Suspense fallback={<Loading />}>
           <FellowshipProgram />
         </Suspense>
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
+
+        <Suspense fallback={<Loading />}>
+          <BloodDriveSection />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
+          <GlobalAlignment />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
+          <OurHub />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
           <CoreValues />
         </Suspense>
-        <PreviousProjects />
-        <Suspense
-          fallback={<div className="text-center py-10">Loading section…</div>}
-        >
+
+        <Suspense fallback={<Loading />}>
+          <PreviousProjects />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
           <PartnerSection />
         </Suspense>
 
+        <Suspense fallback={<Loading />}>
+          <GiveSection />
+        </Suspense>
+
+        <Suspense fallback={<Loading />}>
+          <FinalCTA />
+        </Suspense>
+
         <Footer />
-      </div>
+      </main>
     </>
   );
 }

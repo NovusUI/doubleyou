@@ -1,48 +1,115 @@
-
-
-
 const Footer = () => {
-
-  const scrollToSection = (id:string) => {
+  const scrollToSection = (id: string) => {
     const section = document.getElementById(id);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (section) section.scrollIntoView({ behavior: "smooth" });
   };
-  return (
-    <footer className="bg-white border-t py-8 px-6 text-sm text-gray-600">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-center md:justify-between items-center md:items-start gap-8">
-      <img
-          src="/ddd.jpg" // Replace with your actual logo path
-          alt="Doubleyou Logo"
-          className="h-10 w-[120px] h-[120px]"
-        />
-        <div className="flex gap-16">
-          <div>
-            <h4 className="text-gray-900 font-semibold mb-3">Links</h4>
-            <ul className="space-y-2">
-              <li><a onClick={()=>scrollToSection("home")}>Home</a></li>
-              <li><a onClick={()=>scrollToSection("about-us")}>About Us</a></li>
-              <li><a onClick={()=>scrollToSection("core-solutions")}>What We Do</a></li>
-              <li><a onClick={()=>scrollToSection("next-gen")}>Our Impact</a></li>
-              <li><a onClick={()=>scrollToSection("fellowship")}>Fellowship Program</a></li>
 
+  const navLinks = [
+    { label: "About", id: "about-us" },
+    { label: "Our Ecosystem", id: "core-solutions" },
+    { label: "Campus Fellows", id: "fellowship" },
+    { label: "Blood Drive", id: "blood-drive" },
+    { label: "Partners", id: "partners" },
+    { label: "Give", id: "give" },
+  ];
+
+  const socials = [
+    { label: "Facebook", href: "https://www.facebook.com/Doubleyouinitiative" },
+    { label: "Instagram", href: "https://www.instagram.com/doubleyoucentre/" },
+    { label: "X (Twitter)", href: "https://twitter.com/DoubleyouNGA" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/doubleyougroup/" },
+  ];
+
+  return (
+    <footer className="bg-[#0E1B2E] text-white/60 py-16 px-6">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <img
+                src="/ddd.jpg"
+                alt="Doubleyou Logo"
+                className="w-10 h-10 rounded-lg object-cover"
+              />
+              <div>
+                <p className="text-white font-black text-base leading-none">
+                  Doubleyou
+                </p>
+                <p className="text-[#F7C928]/70 text-xs mt-0.5">
+                  Est. 2019
+                </p>
+              </div>
+            </div>
+            <p className="text-white/50 text-sm leading-relaxed max-w-xs">
+              Advancing Human Potential Across Africa — through education,
+              innovation, and community impact.
+            </p>
+          </div>
+
+          {/* Quick links */}
+          <div>
+            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5">
+              {navLinks.map((link) => (
+                <li key={link.id}>
+                  <button
+                    onClick={() => scrollToSection(link.id)}
+                    className="text-white/50 hover:text-[#F7C928] text-sm transition-colors"
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
             </ul>
           </div>
+
+          {/* Social + Contact */}
           <div>
-            <h4 className="text-gray-900 font-semibold mb-3">Follow Us</h4>
-            <ul className="space-y-2">
-              <li><a href="https://www.facebook.com/Doubleyouinitiative" target="_blank">Facebook</a></li>
-              <li><a href="https://www.instagram.com/doubleyoucentre/" target="_blank">Instagram</a></li>
-              <li><a href="https://twitter.com/DoubleyouNGA" target="_blank">X</a></li>
-              <li><a href="https://www.linkedin.com/company/doubleyougroup/" target="_blank">LinkedIn</a></li>
+            <h4 className="text-white font-semibold text-sm mb-4 uppercase tracking-widest">
+              Follow Us
+            </h4>
+            <ul className="space-y-2.5 mb-8">
+              {socials.map((s) => (
+                <li key={s.label}>
+                  <a
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-white/50 hover:text-[#F7C928] text-sm transition-colors"
+                  >
+                    {s.label}
+                  </a>
+                </li>
+              ))}
             </ul>
+            <a
+              href="mailto:hello@doubleyou.com.ng"
+              className="text-[#F7C928]/80 hover:text-[#F7C928] text-sm transition-colors"
+            >
+              hello@doubleyou.com.ng
+            </a>
           </div>
         </div>
-      </div>
 
-      <div className="mt-8 text-center text-gray-500 text-xs">
-        © 2025 <a href="/" className="underline">Doubleyou</a>. All Rights Reserved
+        {/* Divider */}
+        <div className="border-t border-white/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-white/30 text-xs">
+            © 2026{" "}
+            <button
+              onClick={() => scrollToSection("hero")}
+              className="underline hover:text-white/50 transition-colors"
+            >
+              Doubleyou Centre
+            </button>
+            . All Rights Reserved.
+          </p>
+          <p className="text-white/20 text-xs">
+            Committed to Sustainable Development Goals
+          </p>
+        </div>
       </div>
     </footer>
   );

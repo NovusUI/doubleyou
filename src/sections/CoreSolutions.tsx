@@ -1,121 +1,171 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Link } from "react-router-dom";
-import Yellowlabel from "../components/yellowlabel";
+import { motion } from "framer-motion";
 import gamepad from "../assets/Gamepad.svg";
 import book from "../assets/Book.svg";
 
+const products = [
+  {
+    id: "quest",
+    name: "Quest",
+    tagline: "Learn. Play. Earn.",
+    description:
+      "A gamified learning platform with quiz tournaments, streak-based rewards, and competitive challenges. Quest transforms education into an engaging adventure — making knowledge retention fun and measurable.",
+    icon: gamepad,
+    color: "#DC2626",
+    bgColor: "#FEF2F2",
+    borderColor: "#FECACA",
+    textColor: "#991B1B",
+    cta: null,
+    ctaLabel: "Under Maintenance",
+    maintenance: true,
+  },
+  {
+    id: "labari",
+    name: "Labari Books",
+    tagline: "Read. Listen. Watch.",
+    description:
+      "Africa's digital storytelling platform. Labari preserves and amplifies African narratives through audio, text, and video — bridging tradition with modern technology to promote cultural identity and healing.",
+    icon: book,
+    color: "#16A34A",
+    bgColor: "#F0FDF4",
+    borderColor: "#86EFAC",
+    textColor: "#15803D",
+    cta: "https://labaribooks.com",
+    ctaLabel: "Explore Labari →",
+    maintenance: false,
+  },
+  {
+    id: "innov",
+    name: "Innovation Ecosystem",
+    tagline: "Build. Scale. Impact.",
+    description:
+      "A support framework for ideas, founders, and high-impact research. We provide mentorship, collaborative infrastructure, and community resources to help visionaries build solutions that matter.",
+    icon: null,
+    color: "#D97706",
+    bgColor: "#FFFBEB",
+    borderColor: "#FCD34D",
+    textColor: "#B45309",
+    cta: null,
+    ctaLabel: "Coming Soon",
+    maintenance: false,
+  },
+];
+
 const CoreSolutions = () => {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-
-
-  // Mid layer: title, label
-  const midY = useTransform(scrollYProgress, [0, 1], [0, -60]);
-  // Foreground: cards
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, -30]);
-
   return (
     <section
-    id="core-solutions"
-      ref={ref}
-      className="relative py-20 px-6 snap-y snap-mandatory min-h-screen bg-fixed bg-center bg-no-repeat bg-cover flex flex-col justify-center items-center"
-      style={{ backgroundImage: "url('/Background1.png')" }}
+      id="core-solutions"
+      className="py-24 px-6"
+      style={{ background: "#FAFAF8" }}
     >
-      {/* Mid-layer motion: Label + Heading */}
-      <motion.div style={{ y: midY }} className="text-center mb-12">
-     
-          <Yellowlabel text="what we do" />
-  
-        <motion.h2
-          className="text-4xl font-bold text-gray-900"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          Our Core Solutions
-        </motion.h2>
-      </motion.div>
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="mb-4"
+          >
+            <span className="tag-chip">Our Ecosystem</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-[#0E1B2E] mb-4"
+          >
+            Three Products. One Vision.
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.12 }}
+            viewport={{ once: true }}
+            className="text-gray-500 text-lg max-w-2xl mx-auto"
+          >
+            Each product in the Doubleyou ecosystem is purpose-built to expand
+            access to knowledge and opportunity across Africa.
+          </motion.p>
+        </div>
 
-      {/* Foreground motion: Cards */}
-      <motion.div
-        style={{ y: cardY }}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto"
-      >
-        {/* EduGaming Card */}
-        <motion.div
-          className="bg-[#EAF6FF] h-[320px] border border-[#1B75E8] rounded-[20px] p-5 sm:p-8 lg:p-12 shadow-sm cursor-pointer"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex flex-col justify-between h-full text-[#0E2A46]">
-            <div className="text-3xl flex items-center space-x-6">
-              <motion.span
-                whileHover={{ rotate: [0, 10, -10, 0] }}
-                transition={{ duration: 0.6 }}
+        {/* Product cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {products.map((product, i) => (
+            <motion.div
+              key={product.id}
+              initial={{ opacity: 0, y: 36 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65, delay: i * 0.12 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6, transition: { duration: 0.22 } }}
+              className="bg-white rounded-3xl border p-8 shadow-sm hover:shadow-lg transition-all flex flex-col"
+              style={{ borderColor: product.borderColor }}
+            >
+              {/* Icon */}
+              <div
+                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-6 flex-shrink-0"
+                style={{ backgroundColor: product.bgColor }}
               >
-                <img src={gamepad}></img>
-              </motion.span>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">EduGaming</h3>
-            </div>
-            <p className="text-gray-700 mb-3">
-              We transform learning into play. Through gamified platforms with quiz tournaments and streak-based reward systems, we make education engaging and boost knowledge retention.
-            </p>
-            <a href="https://doubleyou-app.vercel.app/" target="_blank" className="font-semibold underline">Explore Doubleyou</a>
-          </div>
-        </motion.div>
+                {product.icon ? (
+                  <img src={product.icon} alt={product.name} className="w-8 h-8" />
+                ) : (
+                  <svg
+                    className="w-7 h-7"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={1.8}
+                    style={{ color: product.color }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+              </div>
 
-        {/* Labari Card */}
-        <motion.div
-          className="bg-[#EEFBF5] h-[320px] border border-[#00BC65] rounded-[20px] p-5 sm:p-8 lg:p-12 shadow-sm text-[#0E2A46] cursor-pointer"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          whileHover={{ scale: 1.02 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="flex flex-col justify-between h-full">
-            <div className="text-3xl flex items-center space-x-6">
-              <motion.span
-                whileHover={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.6 }}
-              >
-                <img src={book}></img>
-              </motion.span>
-              <h3 className="text-lg md:text-xl font-semibold mb-2">Digital Storytelling with Labari</h3>
-            </div>
-            <p className="text-gray-700 mb-3">
-              Labari is our platform dedicated to preserving and amplifying African narratives. By combining tradition with innovation, we use storytelling to create educational experiences that promote cultural understanding, identity, and healing.
-            </p>
-            <a href="https://labaribooks.com" target="_blank" className="text-green-800 font-semibold underline">Explore Labari</a>
-          </div>
-        </motion.div>
-      </motion.div>
+              {/* Content */}
+              <div className="flex-1">
+                <span
+                  className="text-xs font-bold tracking-widest uppercase mb-2 block"
+                  style={{ color: product.color }}
+                >
+                  {product.tagline}
+                </span>
+                <h3 className="text-xl font-bold text-[#0E1B2E] mb-3">
+                  {product.name}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  {product.description}
+                </p>
+              </div>
 
-      {/* Fancy Button for The Quest Quiz */}
-      <motion.div 
-        className="mt-16 flex justify-center w-full"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <Link 
-          to="/quest-quiz" 
-          className="relative inline-flex items-center justify-center px-8 py-4 overflow-hidden font-bold text-white bg-gradient-to-r from-[#1B75E8] to-[#00BC65] rounded-full shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 group"
-        >
-          <span className="absolute w-0 h-0 transition-all duration-500 ease-out bg-white rounded-full group-hover:w-full group-hover:h-56 opacity-20"></span>
-          <span className="relative flex items-center gap-3 text-lg md:text-xl tracking-wide">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-            The Quest Quiz
-          </span>
-        </Link>
-      </motion.div>
+              {/* CTA */}
+              {product.maintenance ? (
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-400">
+                  <div className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+                  Under Maintenance
+                </div>
+              ) : product.cta ? (
+                <a
+                  href={product.cta}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center text-sm font-bold transition-colors"
+                  style={{ color: product.color }}
+                >
+                  {product.ctaLabel}
+                </a>
+              ) : (
+                <div className="flex items-center gap-2 text-sm font-medium text-gray-400">
+                  <div className="w-2 h-2 rounded-full bg-gray-300" />
+                  {product.ctaLabel}
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

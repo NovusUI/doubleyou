@@ -1,120 +1,146 @@
 import { motion } from "framer-motion";
-import controllerImage from '../assets/controller.svg';
-import Yellowlabel from '../components/yellowlabel';
+
+const stats = [
+  { value: "20,000+", label: "Learners Reached" },
+  { value: "3", label: "Partner Universities" },
+  { value: "5+", label: "Years of Impact" },
+  { value: "Lagos, Abuja,\nJos & Taraba", label: "States Activated" },
+];
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.12, duration: 0.6, ease: "easeOut" },
+  }),
+};
 
 function AboutUs() {
   return (
-    <section id="about-us" className="min-h-screen snap-start flex items-center bg-white px-5 py-20 md:p-0">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
-        
-        {/* IMAGE ANIMATION */}
+    <section id="about-us" className="bg-[#FAFAF8] py-24 px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Top tag */}
         <motion.div
-          className="md:w-1/2"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          variants={{
-            hidden: { opacity: 0, x: -50 },
-            visible: { opacity: 1, x: 0 }
-          }}
+          initial={{ opacity: 0, y: -12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="mb-5"
         >
-          <img src={controllerImage} alt="Game Controller" className="w-full max-w-sm mx-auto" />
+          <span className="tag-chip">Who We Are</span>
         </motion.div>
 
-        {/* TEXT CONTENT ANIMATION */}
-        <motion.div
-          className="md:w-1/2 space-y-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
-          variants={{
-            hidden: {},
-            visible: {},
-          }}
-        >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left — text */}
+          <div>
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.65 }}
+              viewport={{ once: true }}
+              className="text-4xl md:text-5xl font-black text-[#0E1B2E] leading-tight mb-6"
+            >
+              An institution built for{" "}
+              <span className="relative inline-block">
+                Africa's future
+                <svg
+                  className="absolute -bottom-1 left-0 w-full"
+                  height="6"
+                  viewBox="0 0 200 6"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  preserveAspectRatio="none"
+                >
+                  <path
+                    d="M0 3 Q50 0 100 3 Q150 6 200 3"
+                    stroke="#F7C928"
+                    strokeWidth="3"
+                    strokeLinecap="round"
+                    fill="none"
+                  />
+                </svg>
+              </span>
+            </motion.h2>
 
-            <Yellowlabel text='about us' />
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-gray-600 text-lg leading-relaxed mb-5"
+            >
+              Doubleyou is a mission-driven institution operating at the
+              intersection of <strong className="text-[#0E1B2E]">education</strong>,{" "}
+              <strong className="text-[#0E1B2E]">technology</strong>, and{" "}
+              <strong className="text-[#0E1B2E]">human capital development</strong>.
+              We build systems that expand access to knowledge, empower young
+              people, and create real pathways to opportunity.
+            </motion.p>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              viewport={{ once: true }}
+              className="text-gray-600 text-base leading-relaxed mb-8"
+            >
+              Founded in 2019, we have grown from a local initiative into a
+              continental platform—partnering with universities, corporations,
+              and governments across Africa to make education accessible,
+              engaging, and rewarding. Our primary hub is at the{" "}
+              <span className="font-semibold text-[#0E1B2E]">
+                CUCRID Centre at Covenant University
+              </span>
+              , Nigeria.
+            </motion.p>
 
 
-          <motion.h2
-            className="text-4xl font-bold text-gray-900"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            transition={{ duration: 0.6 }}
-          >
-            Who We Are
-          </motion.h2>
+          </div>
 
-          <motion.p
-            className="text-gray-600"
-         
-            transition={{ duration: 0.6, delay: 0.2 }}
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          
-          >
-            DOUBLEYOU CENTRE is a mission-driven edtech company that advances access to quality education across Africa and the global south...
-          </motion.p>
-
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-            variants={{
-              hidden: { opacity: 0, },
-              visible: { opacity: 1, },
-            }}
-
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div>
-              <motion.h3
-                className="text-lg font-semibold text-gray-800"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-              >
-                HOW WE GOT HERE
-              </motion.h3>
-              <motion.p
-                className="text-gray-600"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                Founded in 2019, we are dedicated to creating interactive, engaging learning experiences...
-              </motion.p>
+          {/* Right — stats grid */}
+          <div>
+            <div className="grid grid-cols-2 gap-5">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  custom={i}
+                  variants={fadeUp}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
+                >
+                  <p className="text-4xl md:text-5xl font-black text-[#0E1B2E] mb-1">
+                    {stat.value}
+                  </p>
+                  <p className="text-sm text-gray-500 font-medium">{stat.label}</p>
+                </motion.div>
+              ))}
             </div>
-            <div>
-              <motion.h3
-                className="text-lg font-semibold text-gray-800"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0 },
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                OUR WHY
-              </motion.h3>
-              <motion.p
-                className="text-gray-600"
-                variants={{
-                  hidden: { opacity: 0, y: 10 },
-                  visible: { opacity: 1, y: 0 },
-                }}
 
-                transition={{ duration: 0.4, delay: 0.1 }}
-              >
-                We believe in the power of seeing oneself in what is learned—and in rewarding that connection...
-              </motion.p>
-            </div>
-          </motion.div>
-        </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              viewport={{ once: true }}
+              className="mt-5 bg-[#F7C928]/10 border border-[#F7C928]/30 rounded-2xl p-5 flex gap-4 items-start"
+            >
+              <div className="w-10 h-10 rounded-full bg-[#F7C928] flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg className="w-5 h-5 text-[#0E1B2E]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <p className="text-sm font-bold text-[#0E1B2E] mb-0.5">Primary Hub</p>
+                <p className="text-sm text-gray-600">
+                  Covenant University CUCRID Centre — Ota, Ogun State, Nigeria
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );

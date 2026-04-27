@@ -1,4 +1,3 @@
-import Yellowlabel from "../components/yellowlabel";
 import { motion } from "framer-motion";
 
 const coreValues = [
@@ -6,87 +5,120 @@ const coreValues = [
     title: "Godliness",
     description:
       "We conduct all our activities with moral integrity, compassion, and a deep respect for humanity, rooted in godly values.",
-    borderColor: "border-blue-400",
-    bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
+    color: "#0E1B2E",
+    borderColor: "#93C5FD",
+    bgColor: "#EEF2F8",
   },
   {
     title: "Leadership",
     description:
       "We lead with vision, inspire initiative, and cultivate innovation across our team and the communities we serve.",
-    borderColor: "border-green-400",
-    bgColor: "bg-[#edfdf4]/70",
+    color: "#16A34A",
+    borderColor: "#86EFAC",
+    bgColor: "#F0FDF4",
   },
   {
     title: "Integrity",
     description:
       "We uphold honesty, transparency, and trust as the foundation of every relationship and decision we make.",
-    borderColor: "border-blue-400",
-    bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
+    color: "#0E1B2E",
+    borderColor: "#93C5FD",
+    bgColor: "#EEF2F8",
   },
   {
-    title: "Dilligence",
+    title: "Diligence",
     description:
       "We approach every task with dedication, excellence, and a relentless commitment to quality and detail.",
-    borderColor: "border-green-400",
-    bgColor: "bg-[#edfdf4]/70",
+    color: "#D97706",
+    borderColor: "#FCD34D",
+    bgColor: "#FFFBEB",
   },
   {
     title: "Excellence",
     description:
-      "We continuously innovate and refine our offerings to exceed expectations and set new standards in education and employment.",
-    borderColor: "border-blue-400",
-    bgColor: "bg-[#f1f6fd]/70", // Keep original tone with transparency
+      "We continuously innovate and refine our offerings to exceed expectations and set new standards in education.",
+    color: "#DC2626",
+    borderColor: "#FECACA",
+    bgColor: "#FEF2F2",
   },
   {
     title: "Service",
     description:
       "We exist to bridge opportunity gaps and serve society by expanding inclusive access to education and empowerment.",
-    borderColor: "border-green-400",
-    bgColor: "bg-[#edfdf4]/70",
+    color: "#0E1B2E",
+    borderColor: "#86EFAC",
+    bgColor: "#F0FDF4",
   },
-  // Add more as needed...
 ];
 
 const CoreValues = () => {
   return (
     <section
-    id="core-value"
-      className="py-40 md:px-20 relative bg-fixed bg-center bg-no-repeat bg-cover"
-      style={{
-        backgroundImage: "url('/Background1.png')",
-      }}
+      id="core-value"
+      className="py-24 px-6 bg-[#FAFAF8]"
     >
-      <div className="text-center mb-6">
-        <Yellowlabel text="core value" />
-        <motion.h2 
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        className="text-3xl font-bold text-gray-900 mt-2">
-          Our Core Values
-        </motion.h2>
-      </div>
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: -12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="mb-4"
+          >
+            <span className="tag-chip">Core Values</span>
+          </motion.div>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.05 }}
+            viewport={{ once: true }}
+            className="text-4xl md:text-5xl font-black text-[#0E1B2E] mb-4"
+          >
+            What We Stand For
+          </motion.h2>
+        </div>
 
-      {/* 👇 Scroll Hint for Mobile */}
-      <div className="text-center mb-4 md:hidden animate-pulse text-sm text-gray-500">
-        ← Swipe to explore →
-      </div>
+        {/* Scroll hint for mobile */}
+        <div className="text-center mb-4 md:hidden animate-pulse text-xs text-gray-400 tracking-widest uppercase">
+          ← Swipe to explore →
+        </div>
 
-      <div className="overflow-x-auto scrollbar-hide">
-        <div className="flex space-x-6 min-w-max px-5 md:px-10">
-          {coreValues.map((value, index) => (
-            <motion.div
-              key={index}
-              whileHover={{ y: -5 }}
-              transition={{ type: "spring", stiffness: 150, damping: 12 }}
-              className={`w-[250px] md:w-[300px] max-w-md p-6 rounded-2xl border ${value.borderColor} ${value.bgColor} shadow-md flex-shrink-0 backdrop-blur-md transition`}
-            >
-              <h3 className="text-lg font-bold mb-2 text-[#0E2A46]">
-                {value.title}
-              </h3>
-              <p className="text-gray-700 text-sm">{value.description}</p>
-            </motion.div>
-          ))}
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex space-x-5 min-w-max px-2 py-2 md:grid md:grid-cols-3 md:min-w-0 md:space-x-0 md:gap-5">
+            {coreValues.map((value, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.55, delay: index * 0.07 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -4, transition: { duration: 0.2 } }}
+                className="w-[260px] md:w-auto p-7 rounded-2xl border shadow-sm hover:shadow-md flex-shrink-0 md:flex-shrink transition-all bg-white"
+                style={{ borderColor: value.borderColor }}
+              >
+                {/* Accent dot */}
+                <div
+                  className="w-8 h-8 rounded-full mb-4 flex items-center justify-center"
+                  style={{ backgroundColor: value.bgColor }}
+                >
+                  <div
+                    className="w-3 h-3 rounded-full"
+                    style={{ backgroundColor: value.color }}
+                  />
+                </div>
+                <h3
+                  className="text-lg font-black mb-2"
+                  style={{ color: value.color }}
+                >
+                  {value.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
