@@ -2,26 +2,27 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check } from "lucide-react";
 
-const ACCOUNT_NUMBER = "1219883547";
+const NAIRA_ACCOUNT = "1000555378";
+const USD_ACCOUNT = "5000153088";
 
 const GiveSection = () => {
-  const [copied, setCopied] = useState(false);
+  const [copiedType, setCopiedType] = useState<"NAIRA" | "USD" | null>(null);
 
-  const handleCopy = async () => {
+  const handleCopy = async (account: string, type: "NAIRA" | "USD") => {
     try {
-      await navigator.clipboard.writeText(ACCOUNT_NUMBER);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      await navigator.clipboard.writeText(account);
+      setCopiedType(type);
+      setTimeout(() => setCopiedType(null), 2500);
     } catch {
       // fallback: create temp input
       const input = document.createElement("input");
-      input.value = ACCOUNT_NUMBER;
+      input.value = account;
       document.body.appendChild(input);
       input.select();
       document.execCommand("copy");
       document.body.removeChild(input);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
+      setCopiedType(type);
+      setTimeout(() => setCopiedType(null), 2500);
     }
   };
 
@@ -80,7 +81,7 @@ const GiveSection = () => {
                 <p className="text-[#F7C928] text-xs font-bold uppercase tracking-widest">
                   Bank Transfer
                 </p>
-                <p className="text-white/50 text-xs">Nigeria — Access Bank</p>
+                <p className="text-white/50 text-xs">Globus bank</p>
               </div>
             </div>
 
@@ -89,38 +90,72 @@ const GiveSection = () => {
                 <p className="text-white/40 text-xs uppercase tracking-widest mb-1">
                   Account Name
                 </p>
-                <p className="text-white font-bold text-lg">DoubleYou Concept</p>
+                <p className="text-white font-bold text-lg">DOUBLEYOU DIGITAL INNOVATION CENTER</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4">
                 <p className="text-white/40 text-xs uppercase tracking-widest mb-1">
                   Bank
                 </p>
-                <p className="text-white font-bold text-lg">Access Bank</p>
+                <p className="text-white font-bold text-lg">Globus bank</p>
               </div>
 
               <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4">
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-white/40 text-xs uppercase tracking-widest mb-1">
-                      Account Number
+                      Naira Account
                     </p>
-                    <p className="text-white font-black text-2xl tracking-widest">
-                      {ACCOUNT_NUMBER}
+                    <p className="text-white font-black text-xl md:text-2xl tracking-widest">
+                      {NAIRA_ACCOUNT}
                     </p>
                   </div>
                   <motion.button
-                    id="copy-account-btn"
-                    onClick={handleCopy}
+                    onClick={() => handleCopy(NAIRA_ACCOUNT, "NAIRA")}
                     whileHover={{ scale: 1.08 }}
                     whileTap={{ scale: 0.92 }}
                     className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
-                      copied
+                      copiedType === "NAIRA"
                         ? "bg-green-500/20 text-green-400 border border-green-500/30"
                         : "bg-[#F7C928] text-[#0E1B2E] hover:bg-yellow-300"
                     }`}
                   >
-                    {copied ? (
+                    {copiedType === "NAIRA" ? (
+                      <>
+                        <Check className="w-4 h-4" />
+                        Copied!
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-4 h-4" />
+                        Copy
+                      </>
+                    )}
+                  </motion.button>
+                </div>
+              </div>
+
+              <div className="bg-white/5 border border-white/10 rounded-2xl px-5 py-4">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-widest mb-1">
+                      USD Account
+                    </p>
+                    <p className="text-white font-black text-xl md:text-2xl tracking-widest">
+                      {USD_ACCOUNT}
+                    </p>
+                  </div>
+                  <motion.button
+                    onClick={() => handleCopy(USD_ACCOUNT, "USD")}
+                    whileHover={{ scale: 1.08 }}
+                    whileTap={{ scale: 0.92 }}
+                    className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all ${
+                      copiedType === "USD"
+                        ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                        : "bg-[#F7C928] text-[#0E1B2E] hover:bg-yellow-300"
+                    }`}
+                  >
+                    {copiedType === "USD" ? (
                       <>
                         <Check className="w-4 h-4" />
                         Copied!
