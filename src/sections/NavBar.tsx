@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -34,6 +34,11 @@ export default function Navbar() {
     section.scrollIntoView({ behavior: "smooth" });
   };
 
+  const handleProgramNavigate = () => {
+    navigate("/african-student-impact-program");
+    setMenuOpen(false);
+  };
+
   return (
     <>
       <nav
@@ -45,7 +50,6 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 md:h-20">
-            {/* Logo */}
             <a
               href="/"
               aria-label="Doubleyou Home"
@@ -63,7 +67,6 @@ export default function Navbar() {
               />
             </a>
 
-            {/* Desktop Nav links */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
                 <button
@@ -75,9 +78,15 @@ export default function Navbar() {
                   <span className="absolute left-0 -bottom-0.5 w-0 h-0.5 bg-[#F7C928] transition-all duration-300 group-hover:w-full rounded-full" />
                 </button>
               ))}
+              <button
+                onClick={handleProgramNavigate}
+                className="relative text-[15px] font-medium text-gray-700 hover:text-[#0E1B2E] transition-colors duration-200 group"
+              >
+                ASIP 2026
+                <span className="absolute left-0 -bottom-0.5 w-0 h-0.5 bg-[#F7C928] transition-all duration-300 group-hover:w-full rounded-full" />
+              </button>
             </div>
 
-            {/* Desktop CTA */}
             <div className="hidden md:flex items-center gap-3">
               <motion.button
                 whileHover={{ scale: 1.03 }}
@@ -89,7 +98,6 @@ export default function Navbar() {
               </motion.button>
             </div>
 
-            {/* Mobile menu toggle */}
             <button
               className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition"
               onClick={() => setMenuOpen((o) => !o)}
@@ -101,7 +109,6 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -124,6 +131,15 @@ export default function Navbar() {
                   {link.label}
                 </motion.button>
               ))}
+              <motion.button
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navLinks.length * 0.06 }}
+                onClick={handleProgramNavigate}
+                className="text-3xl font-bold text-white text-left hover:text-[#F7C928] transition-colors"
+              >
+                ASIP 2026
+              </motion.button>
             </nav>
             <div className="mt-auto">
               <motion.button

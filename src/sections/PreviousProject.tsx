@@ -1,7 +1,16 @@
-import { ArrowRight } from "lucide-react";
+﻿import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const projects = [
+  {
+    year: "2026",
+    title: "AFRICAN STUDENT IMPACT PROGRAM",
+    support: "A 16-week remote student program for undergraduates across Africa",
+    color: "bg-green-600",
+    gradient: "from-green-600 to-yellow-400 text-[#0E1B2E]",
+    link: "/african-student-impact-program",
+    external: false,
+  },
   {
     year: "February 2021",
     title: "Student of the Future School Tours",
@@ -71,7 +80,7 @@ export default function PreviousProjects() {
                 whileHover={{ y: -2 }}
                 transition={{ type: "spring", stiffness: 200, damping: 10 }}
                 className={`flex items-center text-sm px-4 py-1.5 rounded-lg transition bg-gradient-to-r ${project.gradient} hover:brightness-110 transition`}
-                onClick={() => window.open(project.link)}
+                onClick={() => window.open(project.link, project.external === false ? "_self" : "_blank")}
               >
                 Learn more <ArrowRight className="w-4 h-4 ml-1" />
               </motion.button>

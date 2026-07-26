@@ -1,4 +1,4 @@
-import { StrictMode } from "react";
+﻿import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
@@ -6,6 +6,7 @@ import App from "./App.tsx";
 import GlobalInternships from "./pages/GlobalInternships.tsx";
 import QuestQuiz from "./pages/QuestQuiz.tsx";
 import InternPortal from "./pages/InternPortal.tsx";
+import AfricanStudentImpactProgram from "./pages/AfricanStudentImpactProgram.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
   {
     path: "/intern-portal",
     element: <InternPortal />,
+  },
+  {
+    path: "/african-student-impact-program",
+    element: <AfricanStudentImpactProgram />,
+  },
+  {
+    path: "/africa-internship-program-2026",
+    element: <AfricanStudentImpactProgram />,
   },
 ]);
 
