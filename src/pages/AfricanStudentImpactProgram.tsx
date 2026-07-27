@@ -1,4 +1,4 @@
-﻿import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   ArrowRight,
   CalendarDays,
@@ -66,7 +66,7 @@ const quickFacts = [
   { label: "Mode", value: "Fully remote", icon: Globe2 },
   { label: "Duration", value: "16 weeks", icon: Clock3 },
   { label: "Starts", value: "August 2026", icon: CalendarDays },
-  { label: "Deadline", value: "31 July 2026", icon: Sparkles },
+  { label: "Deadline", value: "7 August 2026", icon: Sparkles },
 ];
 
 const fadeInUp = {
@@ -346,7 +346,7 @@ export default function AfricanStudentImpactProgram() {
             <div className="mt-10 grid md:grid-cols-4 gap-4">
               {[
                 ["Now", "Applications open", "Choose your track and complete the Google Form."],
-                ["31 July 2026", "Application deadline", "Submit your application by the deadline."],
+                ["7 August 2026", "Application deadline", "Submit your application by the deadline."],
                 ["Early August 2026", "Review and selection", "Shortlisted applicants will be contacted after review."],
                 ["August 2026", "Program begins", "Selected participants join onboarding and begin the 16-week program."],
               ].map(([date, title, copy]) => (
@@ -371,7 +371,7 @@ export default function AfricanStudentImpactProgram() {
           <div className="max-w-7xl mx-auto grid lg:grid-cols-[0.38fr_0.62fr] gap-8 items-start">
             <div>
               <p className="text-[#0B9F6E] text-xs font-black tracking-[0.22em] uppercase">
-                Apply before 31 July 2026
+                Apply before 7 August 2026
               </p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-black tracking-tight">
                 Submit your application.
